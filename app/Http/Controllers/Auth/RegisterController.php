@@ -12,10 +12,10 @@ use App\Http\Resources\User as UserResource;
 
 class RegisterController extends Controller
 {
-    
+
     /**
      * Register
-     * 
+     *
      * @param RegisterRequest $request
      * @return \Illuminate\Http\JsonResponse
      * @throws \Illuminate\Validation\ValidationException
@@ -23,9 +23,9 @@ class RegisterController extends Controller
     public function register(RegisterRequest $request)
     {
         $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
+            User::NAME => $request->name,
+            User::EMAIL => $request->email,
+            User::PASSWORD => Hash::make($request->password),
         ]);
 
         $token = JWTAuth::fromUser($user);

@@ -2,14 +2,23 @@
 
 namespace App;
 
+use App\Notifications\MailResetPasswordNotification;
+use Illuminate\Auth\MustVerifyEmail;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class User extends Authenticatable implements JWTSubject
 {
-    use Notifiable;
+    use Notifiable, MustVerifyEmail;
+
+    const EMAIL = 'email';
+    const PASSWORD = 'password';
+    const REMEMBER_TOKEN = 'remember_token';
+    const NAME = 'name';
+    const ID = 'id';
+    const TABLE = 'users';
+
 
     /**
      * The attributes that are mass assignable.
@@ -17,7 +26,9 @@ class User extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        self::NAME,
+        self::PASSWORD,
+        self::EMAIL
     ];
 
     /**
@@ -26,10 +37,11 @@ class User extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        self::PASSWORD,
+        self::REMEMBER_TOKEN,
     ];
 
-    
+
     /**
      * Get the identifier that will be stored in the subject claim of the JWT.
      *
@@ -49,12 +61,12 @@ class User extends Authenticatable implements JWTSubject
     {
         return [];
     }
-    
+
     /**
      * Override the mail body for reset password notification mail.
      */
     public function sendPasswordResetNotification($token)
     {
-        $this->notify(new \App\Notifications\MailResetPasswordNotification($token));
+        $this->notify(new MailResetPasswordNotification($token));
     }
 }
