@@ -8,7 +8,6 @@ use Illuminate\Support\ServiceProvider;
 class CoreServiceProvider extends ServiceProvider
 {
     /**
-     * Testing
      * Boot the application events.
      *
      * @return void
