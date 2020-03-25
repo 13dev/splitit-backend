@@ -22,5 +22,10 @@ RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
 # Install composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
+#Install php-cs-fixer
+RUN curl -L https://cs.symfony.com/download/php-cs-fixer-v2.phar -o php-cs-fixer \
+    && chmod a+x php-cs-fixer \
+    && mv php-cs-fixer /usr/local/bin/php-cs-fixer
+
 # Set container working dir
 WORKDIR /var/www/app
