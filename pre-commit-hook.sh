@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-docker-compose exec php php-cs-fixer fix
+docker-compose run php php-cs-fixer fix
