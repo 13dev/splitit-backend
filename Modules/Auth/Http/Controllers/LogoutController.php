@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace Modules\Auth\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use JWTAuth;
 

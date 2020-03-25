@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace Modules\Auth\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
+use App\Http\Requests\Auth\ForgotPasswordRequest;
 use Illuminate\Foundation\Auth\ResetsPasswords;
-use  App\Http\Requests\Auth\ForgotPasswordRequest;
+use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
+use  Illuminate\Http\Request;
+
 class ForgotPasswordController extends Controller
 {
     use SendsPasswordResetEmails, ResetsPasswords {
@@ -14,7 +15,7 @@ class ForgotPasswordController extends Controller
         ResetsPasswords::credentials insteadof SendsPasswordResetEmails;
     }
     /**
-     * Send password reset link. 
+     * Send password reset link.
      */
     public function sendPasswordResetLink(ForgotPasswordRequest $request)
     {
@@ -32,7 +33,7 @@ class ForgotPasswordController extends Controller
     {
         return response()->json([
             'message' => 'Password reset email sent.',
-            'data' => $response
+            'data' => $response,
         ]);
     }
     /**

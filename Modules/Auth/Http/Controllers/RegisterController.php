@@ -1,18 +1,17 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace Modules\Auth\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\RegisterRequest;
+use App\Http\Resources\User as UserResource;
 use App\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use JWTAuth;
-use App\Http\Resources\User as UserResource;
 
 class RegisterController extends Controller
 {
-
     /**
      * Register
      *
@@ -33,6 +32,5 @@ class RegisterController extends Controller
         $data = new UserResource($user);
 
         return response()->json(compact('token', 'data'));
-
     }
 }

@@ -1,24 +1,23 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace Modules\Auth\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
-use Illuminate\Foundation\Auth\ResetsPasswords;
 use Hash;
 use Illuminate\Auth\Events\PasswordReset;
+use Illuminate\Foundation\Auth\ResetsPasswords;
+use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
+use Illuminate\Http\Request;
 
 class ResetPasswordController extends Controller
 {
-    
     use SendsPasswordResetEmails, ResetsPasswords {
         SendsPasswordResetEmails::broker insteadof ResetsPasswords;
         ResetsPasswords::credentials insteadof SendsPasswordResetEmails;
     }
-    
+
     /**
-     * Handle reset password 
+     * Handle reset password
      */
     public function callResetPassword(Request $request)
     {
@@ -38,7 +37,7 @@ class ResetPasswordController extends Controller
         $user->save();
         event(new PasswordReset($user));
     }
-    
+
     /**
      * Get the response for a successful password reset.
      *
@@ -61,5 +60,4 @@ class ResetPasswordController extends Controller
     {
         return response()->json(['message' => 'Failed, Invalid Token.']);
     }
-
 }

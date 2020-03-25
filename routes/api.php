@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\Auth\AuthController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,17 +18,6 @@ Route::get('/', function () {
         'app' => 'Laravel 6 - ' . env('APP_NAME'),
         'version' => config('api.version'),
     ];
-});
-
-Route::namespace('Auth')->prefix('auth')->group(function () {
-    // Login route
-    Route::post('login', [AuthController::class, 'login']);
-    //Register route
-    Route::post('register', 'RegisterController@register');
-    // Send reset password mail
-    Route::post('recovery', 'ForgotPasswordController@sendPasswordResetLink');
-    // handle reset password form process
-    Route::post('reset', 'ResetPasswordController@callResetPassword');
 });
 
 Route::group(['middleware' => ['jwt', 'jwt.auth']], function () {
