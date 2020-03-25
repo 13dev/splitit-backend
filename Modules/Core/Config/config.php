@@ -1,5 +1,5 @@
 <?php
 
-return [
-    'name' => 'Core',
-];
+return array(
+    'name' =>'Core',
+);
