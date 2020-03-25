@@ -5,7 +5,8 @@ namespace Modules\Core\Providers;
 use Illuminate\Database\Eloquent\Factory;
 use Illuminate\Support\ServiceProvider;
 
-class CoreServiceProvider extends ServiceProvider{
+class CoreServiceProvider extends ServiceProvider
+{
     /**
      * Boot the application events.
      *
