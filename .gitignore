@@ -16,3 +16,4 @@ _idea_helper.php
 storage/logs/
 docker/mysql/data/*
 docker/logs/nginx/*
+.php_cs.cache

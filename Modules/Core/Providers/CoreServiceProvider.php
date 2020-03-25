@@ -2,8 +2,8 @@
 
 namespace Modules\Core\Providers;
 
-use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
+use Illuminate\Support\ServiceProvider;
 
 class CoreServiceProvider extends ServiceProvider
 {
@@ -42,7 +42,8 @@ class CoreServiceProvider extends ServiceProvider
             module_path('Core', 'Config/config.php') => config_path('core.php'),
         ], 'config');
         $this->mergeConfigFrom(
-            module_path('Core', 'Config/config.php'), 'core'
+            module_path('Core', 'Config/config.php'),
+            'core'
         );
     }
 
@@ -58,8 +59,8 @@ class CoreServiceProvider extends ServiceProvider
         $sourcePath = module_path('Core', 'Resources/views');
 
         $this->publishes([
-            $sourcePath => $viewPath
-        ],'views');
+            $sourcePath => $viewPath,
+        ], 'views');
 
         $this->loadViewsFrom(array_merge(array_map(function ($path) {
             return $path . '/modules/core';
