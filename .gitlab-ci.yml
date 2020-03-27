@@ -1,0 +1,24 @@
+image: registry.gitlab.com/aknosis/laravel-ci-example:latest
+
+services:
+  - mysql:5.7
+
+variables:
+  MYSQL_DATABASE: app
+  MYSQL_ROOT_PASSWORD: app
+
+cache:
+  paths:
+    - vendor/
+
+before_script:
+  - composer install
+  - cp .env.example .env
+  - php artisan key:generate
+  - php artisan config:cache
+  - php artisan migrate
+  - php artisan db:seed
+
+test:
+  script:
+    - php vendor/bin/phpunit --coverage-text --colors=never
