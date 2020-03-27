@@ -22,4 +22,4 @@ test:
     paths:
       - vendor/
   script:
-    - docker-compose run php vendor/bin/phpunit --coverage-text --colors=never
+    - docker-compose run php php vendor/bin/phpunit --coverage-text --colors=never
