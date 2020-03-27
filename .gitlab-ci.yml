@@ -1,9 +1,13 @@
+image: php:7.4-fpm
+
 services:
-  - mysql:5.7
+  - mariadb
 
 variables:
+  MYSQL_ROOT_PASSWORD: admin
   MYSQL_DATABASE: app
-  MYSQL_ROOT_PASSWORD: app
+  MYSQL_USER: app
+  MYSQL_PASSWORD: app
 
 cache:
   paths:
