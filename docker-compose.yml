@@ -1,6 +1,10 @@
 version: '3.7'
 services:
   db:
+    build:
+      context: .
+      cache_from:
+        - mariadb
     container_name: db
     image: mariadb
     environment:
