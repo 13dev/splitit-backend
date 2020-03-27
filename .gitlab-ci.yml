@@ -9,10 +9,6 @@ build:
     - pip install docker-compose
     - docker-compose up -d
 
-cache:
-  paths:
-    - vendor/
-
 before_script:
   - composer install
   - cp .env.example .env
