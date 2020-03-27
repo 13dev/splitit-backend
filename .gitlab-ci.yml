@@ -1,5 +1,3 @@
-image: php:7.4-fpm
-
 services:
   - mysql:5.7
 
