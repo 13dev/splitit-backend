@@ -3,13 +3,13 @@
 namespace Modules\Auth\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Resources\User as UserResource;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use JWTAuth;
+use Modules\Auth\Http\Requests\LoginRequest;
 use Tymon\JWTAuth\Exceptions\JWTException;
 
 class AuthController extends Controller
