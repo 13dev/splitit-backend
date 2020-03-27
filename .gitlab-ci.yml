@@ -19,4 +19,4 @@ build:
 
 test:
   script:
-    - php vendor/bin/phpunit --coverage-text --colors=never
+    - docker-compose run php vendor/bin/phpunit --coverage-text --colors=never
