@@ -11,6 +11,8 @@ $finder = PhpCsFixer\Finder::create()
         'tests',
         'node_modules',
         'views',
+        '_ide_helper.php',
+        '_ide_helper_models.php'
     ])
     ->notPath('server.php')
 ;
