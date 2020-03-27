@@ -18,5 +18,8 @@ build:
 #  - php artisan db:seed
 
 test:
+  cache:
+    paths:
+      - vendor/
   script:
     - docker-compose run php vendor/bin/phpunit --coverage-text --colors=never
