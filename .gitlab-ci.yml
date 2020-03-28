@@ -27,12 +27,12 @@ step-deploy-prod:
     - echo "$USER"
     - sudo docker-compose build
     - sudo docker-compose up -d
-    - docker-compose run php composer install
-    - docker-compose run php cp .env.example .env
-    - docker-compose run php php artisan key:generate
-    - docker-compose run php php artisan config:cache
-    - docker-compose run php php artisan db:create
-    - docker-compose run php php artisan migrate
-    - docker-compose run php php artisan db:seed
+    - docker-compose run --user=gitlab-runner php composer install
+    - docker-compose run --user=gitlab-runner php cp .env.example .env
+    - docker-compose run --user=gitlab-runner php php artisan key:generate
+    - docker-compose run --user=gitlab-runner php php artisan config:cache
+    - docker-compose run --user=gitlab-runner php php artisan db:create
+    - docker-compose run --user=gitlab-runner php php artisan migrate
+    - docker-compose run --user=gitlab-runner php php artisan db:seed
   environment: production
   when: manual
