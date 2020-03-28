@@ -30,6 +30,7 @@ step-deploy-prod:
     - sudo docker-compose run php cp .env.example .env
     - sudo docker-compose run php php artisan key:generate
     - sudo docker-compose run php php artisan config:cache
+    - sudo docker-compose run php php artisan db:create
     - sudo docker-compose run php php artisan migrate
     - sudo docker-compose run php php artisan db:seed
   environment: production
