@@ -20,14 +20,14 @@ Route::get('/', function () {
     ];
 });
 
-Route::group(['middleware' => ['jwt', 'jwt.auth']], function () {
-    Route::group(['namespace' => 'Profile'], function () {
-        Route::get('profile', 'ProfileController@me');
-        Route::put('profile', 'ProfileController@update');
-        Route::put('profile/password', 'ProfileController@updatePassword');
-    });
-
-    Route::group(['namespace' => 'Auth'], function () {
-        Route::post('logout', 'LogoutController@logout');
-    });
-});
+//Route::group(['middleware' => ['jwt', 'jwt.auth']], function () {
+//    Route::group(['namespace' => 'Profile'], function () {
+//        Route::get('profile', 'ProfileController@me');
+//        Route::put('profile', 'ProfileController@update');
+//        Route::put('profile/password', 'ProfileController@updatePassword');
+//    });
+//
+//    Route::group(['namespace' => 'Auth'], function () {
+//        Route::post('logout', 'LogoutController@logout');
+//    });
+//});

@@ -1,13 +1,12 @@
 <?php
 
-use App\Http\Controllers\Auth\AuthController;
-use App\Http\Controllers\Auth\ForgotPasswordController;
-use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\Auth\ResetPasswordController;
-
 // Login route
-Route::post('login', [AuthController::class, 'login']);
+use Modules\Auth\Http\Controllers\AuthController;
+use Modules\Auth\Http\Controllers\ForgotPasswordController;
+use Modules\Auth\Http\Controllers\RegisterController;
+use Modules\Auth\Http\Controllers\ResetPasswordController;
 
+Route::post('login', [AuthController::class, 'login']);
 //Register route
 Route::post('register', [RegisterController::class, 'register']);
 
