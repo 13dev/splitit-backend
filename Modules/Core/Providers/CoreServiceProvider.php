@@ -4,6 +4,7 @@ namespace Modules\Core\Providers;
 
 use Illuminate\Database\Eloquent\Factory;
 use Illuminate\Support\ServiceProvider;
+use Modules\Core\Console\CreateDatabaseCommand;
 
 class CoreServiceProvider extends ServiceProvider
 {
@@ -19,6 +20,9 @@ class CoreServiceProvider extends ServiceProvider
         $this->registerViews();
         $this->registerFactories();
         $this->loadMigrationsFrom(module_path('Core', 'Database/Migrations'));
+        $this->commands([
+            CreateDatabaseCommand::class,
+        ]);
     }
 
     /**
