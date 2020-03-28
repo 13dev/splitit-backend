@@ -24,13 +24,13 @@ step-deploy-prod:
     - sudo pip3 install --upgrade setuptools
     - sudo pip3 install docker-compose
     - sudo docker image prune -f
-    - docker-compose build
-    - docker-compose up -d
-    - docker-compose run php composer install
-    - docker-compose run php cp .env.example .env
-    - docker-compose run php php artisan key:generate
-    - docker-compose run php php artisan config:cache
-    - docker-compose run php php artisan migrate
-    - docker-compose run php php artisan db:seed
+    - sudo docker-compose build
+    - sudo docker-compose up -d
+    - sudo docker-compose run php composer install
+    - sudo docker-compose run php cp .env.example .env
+    - sudo docker-compose run php php artisan key:generate
+    - sudo docker-compose run php php artisan config:cache
+    - sudo docker-compose run php php artisan migrate
+    - sudo docker-compose run php php artisan db:seed
   environment: production
   when: manual
