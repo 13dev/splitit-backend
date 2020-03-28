@@ -30,7 +30,7 @@ step-deploy-prod:
     - docker-compose run php cp .env.example .env
     - docker-compose run php php artisan key:generate
     - docker-compose run php php artisan config:cache
-    - docker-compose run php php artisan db:create
+    - docker-compose run php php artisan db:create -v
     - docker-compose run php php artisan migrate -v
     - docker-compose run php php artisan db:seed
     - sudo chown $USER:$USER -R .
