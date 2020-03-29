@@ -26,14 +26,14 @@ step-deploy-prod:
     - sudo docker image prune -f
     - sudo docker-compose build
     - sudo docker-compose up -d
-    - docker-compose run php composer install
-    - docker-compose run php cp .env.example .env
-    - docker-compose run php php artisan key:generate
-    - docker-compose run php php artisan config:cache
-    - docker-compose run php php artisan db:create -v
-    - docker-compose run php php artisan migrate -v
-    - docker-compose run php php artisan db:seed
-    - sudo chown $USER:$USER -R .
+    - docker-compose exec -T php php composer install
+    - docker-compose exec -T php cp .env.example .env
+    - docker-compose exec -T php php artisan key:generate
+    - docker-compose exec -T php artisan config:cache
+    - docker-compose exec -T php artisan db:create -v
+    - docker-compose exec -T php artisan migrate -v
+    - docker-compose exec -T php artisan db:seed
+#sudo chown $USER:$USER -R .
 
   environment: production
   when: manual
