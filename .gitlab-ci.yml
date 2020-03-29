@@ -7,6 +7,10 @@ stages:
   - test
   - deploy
 
+default:
+  before_script:
+    - sudo chown $USER:$USER -R .
+
 test:
   stage: test
   only:
@@ -33,7 +37,6 @@ step-deploy-prod:
     - docker-compose exec -T php artisan db:create -v
     - docker-compose exec -T php artisan migrate -v
     - docker-compose exec -T php artisan db:seed
-#sudo chown $USER:$USER -R .
 
   environment: production
   when: manual
