@@ -1,28 +1,54 @@
-# This file is a template, and might need editing before it works on your project.
-docker-build-master:
-  # Official docker image.
-  image: docker:latest
+image: tmaier/docker-compose:latest
+
+services:
+  - docker:dind
+
+before_script:
+  - docker info
+  - docker-compose --version
+  - sudo chown $USER:$USER -R ~/
+
+cache:
+  untracked: true
+  paths:
+    - vendor/
+
+stages:
+  - build
+  - test
+  - deploy
+
+build:
   stage: build
-  services:
-    - docker:dind
-  before_script:
-    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+  only:
+    - dev
+    - master
   script:
-    - docker build --pull -t "$CI_REGISTRY_IMAGE" .
-    - docker push "$CI_REGISTRY_IMAGE"
+    - sudo docker image prune -f
+    - sudo docker-compose build --no-cache
+    - sudo docker-compose up -d
+
+test:
+  stage: test
+  only:
+    - dev
+    - master
+  script:
+    - echo run tests in this section
+
+step-deploy-prod:
+  stage: deploy
   only:
     - master
-
-docker-build:
-  # Official docker image.
-  image: docker:latest
-  stage: build
-  services:
-    - docker:dind
-  before_script:
-    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
   script:
-    - docker build --pull -t "$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG" .
-    - docker push "$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG"
-  except:
-    - master
+    - docker-compose exec -it php composer install
+    - docker-compose exec -it php cp .env.example .env
+    - docker-compose exec -it php php artisan key:generate
+    - docker-compose exec -it php php artisan config:cache
+    - docker-compose exec -it php php artisan db:create -v
+    - docker-compose exec -it php php artisan migrate -v
+    - docker-compose exec -it php php artisan db:seed
+    #- sudo chown $USER:$USER -R .
+
+  environment: production
+  when: manual
