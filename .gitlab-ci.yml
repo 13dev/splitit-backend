@@ -44,13 +44,13 @@ step-deploy-prod:
   only:
     - master
   script:
-    - docker-compose exec -it php composer install
-    - docker-compose exec -it php cp .env.example .env
-    - docker-compose exec -it php php artisan key:generate
-    - docker-compose exec -it php php artisan config:cache
-    - docker-compose exec -it php php artisan db:create -v
-    - docker-compose exec -it php php artisan migrate -v
-    - docker-compose exec -it php php artisan db:seed
+    - docker exec -it php composer install
+    - docker exec -it php cp .env.example .env
+    - docker exec -it php php artisan key:generate
+    - docker exec -it php php artisan config:cache
+    - docker exec -it php php artisan db:create -v
+    - docker exec -it php php artisan migrate -v
+    - docker exec -it php php artisan db:seed
     #- sudo chown $USER:$USER -R .
 
   environment: production
