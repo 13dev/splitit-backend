@@ -47,6 +47,7 @@ step-deploy-prod:
     - $DOCKER_COMPOSE php php artisan key:generate
     - $DOCKER_COMPOSE php php artisan config:cache
     - $DOCKER_COMPOSE php php artisan db:create -v
+    - $DOCKER_COMPOSE php php artisan cache:clear
     - $DOCKER_COMPOSE php php artisan migrate -v
     - $DOCKER_COMPOSE php php artisan db:seed
   environment: production
