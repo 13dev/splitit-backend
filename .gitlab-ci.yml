@@ -6,7 +6,10 @@ services:
 before_script:
   - docker info
   - docker-compose --version
-  - sudo chown $USER:$USER -R ~/
+  - sudo chown $USER:$USER -R ~/builds/
+
+after_script:
+  - sudo chown $USER:$USER -R ~/builds/
 
 cache:
   untracked: true
