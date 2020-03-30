@@ -28,6 +28,8 @@ build:
     - sudo docker image prune -f
     - sudo docker-compose build
     - sudo docker-compose up -d
+  after_script:
+    - sudo chown $USER:$USER -R .
 
 test:
   stage: test
