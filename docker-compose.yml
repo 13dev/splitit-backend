@@ -1,7 +1,7 @@
 version: '3.7'
 services:
   db:
-    host_command: export UID
+    user: "1000:1000"
     container_name: db
     image: mariadb
     environment:
@@ -16,7 +16,6 @@ services:
     networks:
       - db
   php:
-    host_command: export UID
     environment:
       PHP_IDE_CONFIG: "serverName=docker-server"
     container_name: php
