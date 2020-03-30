@@ -4,7 +4,6 @@ services:
   - docker:dind
 
 before_script:
-  - docker info
   - docker-compose --version
   - sudo chown $USER:$USER -R ~/builds/
 
@@ -28,7 +27,7 @@ build:
     - master
   script:
     - sudo docker image prune -f
-    - sudo docker-compose build --no-cache
+    - sudo docker-compose build
     - sudo docker-compose up -d
 
 test:
