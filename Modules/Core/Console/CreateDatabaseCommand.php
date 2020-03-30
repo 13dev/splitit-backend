@@ -4,6 +4,7 @@ namespace Modules\Core\Console;
 
 use DB;
 use Illuminate\Console\Command;
+use PDO;
 
 class CreateDatabaseCommand extends Command
 {
@@ -39,10 +40,27 @@ class CreateDatabaseCommand extends Command
     public function handle()
     {
         $this->info('Creating database...');
+
+        $databaseName = config('database.connections.mysql.database');
+        $charset = config('database.connections.mysql.charset','utf8mb4');
+        $collation = config('database.connections.mysql.collation','utf8mb4_unicode_ci');
+
+        config(['database.connections.mysql.database' => null]);
+
+        //create database
         DB::statement(
-            sprintf('CREATE DATABASE IF NOT EXISTS %s', env('DB_DATABASE'))
+            sprintf(
+                'CREATE DATABASE IF NOT EXISTS %s CHARACTER SET %s COLLATE %s;',
+                $databaseName,
+                $charset,
+                $collation
+            )
         );
 
+        config(['database.connections.mysql.database' => $databaseName]);
+
         $this->info('Database created!');
+
+        return true;
     }
 }
