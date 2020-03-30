@@ -3,12 +3,11 @@ image: tmaier/docker-compose:latest
 services:
   - docker:dind
 
+variables:
+  DOCKER_COMPOSE: "docker exec -it -u ${UID}:${GID}"
+
 before_script:
   - docker-compose --version
-  - sudo chown $USER:$USER -R ~/builds/
-
-after_script:
-  - sudo chown $USER:$USER -R ~/builds/
 
 cache:
   untracked: true
@@ -43,13 +42,13 @@ step-deploy-prod:
   only:
     - master
   script:
-    - docker exec -it php composer install
-    - docker exec -it php cp .env.example .env
-    - docker exec -it php php artisan key:generate
-    - docker exec -it php php artisan config:cache
-    - docker exec -it php php artisan db:create -v
-    - docker exec -it php php artisan migrate -v
-    - docker exec -it php php artisan db:seed
+    - $DOCKER_COMPOSE php composer install
+    - $DOCKER_COMPOSE php cp .env.example .env
+    - $DOCKER_COMPOSE php php artisan key:generate
+    - $DOCKER_COMPOSE php php artisan config:cache
+    - $DOCKER_COMPOSE php php artisan db:create -v
+    - $DOCKER_COMPOSE php php artisan migrate -v
+    - $DOCKER_COMPOSE php php artisan db:seed
     #- sudo chown $USER:$USER -R .
 
   environment: production
