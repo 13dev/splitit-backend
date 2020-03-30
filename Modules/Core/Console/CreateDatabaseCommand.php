@@ -4,7 +4,6 @@ namespace Modules\Core\Console;
 
 use DB;
 use Illuminate\Console\Command;
-use PDO;
 
 class CreateDatabaseCommand extends Command
 {
@@ -42,8 +41,8 @@ class CreateDatabaseCommand extends Command
         $this->info('Creating database...');
 
         $databaseName = config('database.connections.mysql.database');
-        $charset = config('database.connections.mysql.charset','utf8mb4');
-        $collation = config('database.connections.mysql.collation','utf8mb4_unicode_ci');
+        $charset = config('database.connections.mysql.charset', 'utf8mb4');
+        $collation = config('database.connections.mysql.collation', 'utf8mb4_unicode_ci');
 
         config(['database.connections.mysql.database' => null]);
 
@@ -59,7 +58,7 @@ class CreateDatabaseCommand extends Command
 
         config(['database.connections.mysql.database' => $databaseName]);
 
-        $this->info('Database created!');
+        $this->info("Database {$databaseName} created!");
 
         return true;
     }
