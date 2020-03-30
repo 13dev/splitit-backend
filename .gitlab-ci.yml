@@ -2,15 +2,14 @@ image: docker:stable
 
 services:
   - docker:dind
-
-before_script:
-  - sudo chown $USER:$USER -R .
   
 stages:
   - test
   - deploy
 
 test:
+  before_script:
+    - sudo chown $USER:$USER -R .
   stage: test
   only:
     - dev
