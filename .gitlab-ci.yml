@@ -49,7 +49,5 @@ step-deploy-prod:
     - $DOCKER_COMPOSE php php artisan db:create -v
     - $DOCKER_COMPOSE php php artisan migrate -v
     - $DOCKER_COMPOSE php php artisan db:seed
-    #- sudo chown $USER:$USER -R .
-
   environment: production
   when: manual
