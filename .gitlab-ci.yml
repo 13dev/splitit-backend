@@ -10,7 +10,8 @@ building:
     - cp .env.testing .env
     - php artisan key:generate
     - php artisan db:create -v
-    - php artisan migrate --seed
+    - php artisan migrate:fresh
+    - php artisan db:seed
     - php artisan cache:clear
     - php artisan config:clear
     - php artisan storage:link
