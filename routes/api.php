@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return [
-        'app' => 'Laravel 6 - ' . env('APP_NAME'),
+        'app' => 'Laravel 6 "' . env('APP_NAME') . '"',
         'version' => config('api.version'),
     ];
 });
