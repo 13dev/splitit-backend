@@ -18,8 +18,8 @@ building:
     #- chown -R deployer:www-data /var/www/html/app/
     - find /var/www/html/app -type f -exec chmod 664 {} \;
     - find /var/www/html/app -type d -exec chmod 775 {} \;
-    - chgrp -R www-data storage bootstrap/cache
-    - chmod -R ug+rwx storage bootstrap/cache
+    #- #chgrp -R www-data storage bootstrap/cache
+    #- #chmod -R ug+rwx storage bootstrap/cache
 testing:
   stage: test
   script:
