@@ -1,3 +1,5 @@
+[![pipeline status](https://gitlab.com/splitapp/Splitit-backend/badges/master/pipeline.svg)](https://gitlab.com/splitapp/Splitit-backend/-/commits/master)
+[![coverage report](https://gitlab.com/splitapp/Splitit-backend/badges/master/coverage.svg)](https://gitlab.com/splitapp/Splitit-backend/-/commits/master)
 # Splitit
 
 This is RESTful API for splitit using Laravel, **This file is incomplete**
