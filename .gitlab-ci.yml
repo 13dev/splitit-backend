@@ -23,36 +23,31 @@ cache:
 # services such as redis or postgres
 before_script:
   # Update packages
-  - apt-get update -yqq
+  - sudo apt-get update -yqq
   # Install dependencies
-  - apt-get install git libcurl4-gnutls-dev libicu-dev libmcrypt-dev libvpx-dev libjpeg-dev libpng-dev libxpm-dev zlib1g-dev libfreetype6-dev libxml2-dev libexpat1-dev libbz2-dev libgmp3-dev libldap2-dev unixodbc-dev libpq-dev libsqlite3-dev libaspell-dev libsnmp-dev libpcre3-dev libtidy-dev -yqq
+  - sudo apt-get install git libcurl4-gnutls-dev libicu-dev libmcrypt-dev libvpx-dev libjpeg-dev libpng-dev libxpm-dev zlib1g-dev libfreetype6-dev libxml2-dev libexpat1-dev libbz2-dev libgmp3-dev libldap2-dev unixodbc-dev libpq-dev libsqlite3-dev libaspell-dev libsnmp-dev libpcre3-dev libtidy-dev -yqq
   # Install php extensions
-  - docker-php-ext-install mbstring pdo_mysql curl json intl gd xml zip bz2 opcache
+  - sudo docker-php-ext-install mbstring pdo_mysql curl json intl gd xml zip bz2 opcache
   # Install & enable Xdebug for code coverage reports
-  - pecl install xdebug
-  - docker-php-ext-enable xdebug
+  - sudo pecl install xdebug
+  - sudo docker-php-ext-enable xdebug
   # Install Composer and project dependencies.
-  - curl -sS https://getcomposer.org/installer | php
-  - php composer.phar install
+  - sudo curl -sS https://getcomposer.org/installer | php
+  - sudo php composer.phar install
   # Copy over testing configuration.
   # Don't forget to set the database config in .env.testing correctly
   # DB_HOST=mysql
   # DB_DATABASE=project_name
   # DB_USERNAME=root
   # DB_PASSWORD=secret
-  - cp .env.testing .env
-  # Run npm build
-  # comment this out if you don't have a frontend build
-  # you can change this to to your frontend building script like
-  # npm run build
-  - npm run dev
+  - sudo cp .env.testing .env
   # Generate an application key. Re-cache.
-  - php artisan key:generate
-  - php artisan config:cache
+  - sudo php artisan key:generate
+  - sudo php artisan config:cache
   # Run database migrations.
-  - php artisan migrate
+  - sudo php artisan migrate
   # Run database seed
-  - php artisan db:seed
+  - sudo php artisan db:seed
 
 test:
   script:
