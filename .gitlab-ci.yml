@@ -2,10 +2,12 @@ before_script:
   - echo "Before script"
   - cd /var/www/html/app
 building:
+  only:
+    - master
   stage: build
   script:
     - git reset --hard
-    - git pull origin dev
+    - git pull origin master
     - composer install
     - cp .env.testing .env
     - php artisan key:generate
@@ -15,6 +17,7 @@ building:
     - php artisan cache:clear
     - php artisan config:clear
     - php artisan storage:link
+    - chown -R
     #- chown -R deployer:www-data /var/www/html/app/
     - find /var/www/html/app -type f -exec chmod 664 {} \;
     - find /var/www/html/app -type d -exec chmod 775 {} \;
