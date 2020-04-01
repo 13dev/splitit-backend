@@ -23,6 +23,9 @@ building:
 testing:
   stage: test
   script:
+    - composer dump-autoload
+    - php artisan cache:clear
+    - php artisan config:clear
     - php ./vendor/bin/phpunit
 deploying:
   stage: deploy
