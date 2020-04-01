@@ -13,7 +13,7 @@
 
 Route::get('/', function () {
     return [
-        'app' => 'Laravel 6 - ' . env('APP_NAME'),
+        'app' =>  sprintf("Laravel 6 '%s'", env('APP_NAME')),
         'version' => config('api.version'),
     ];
 });

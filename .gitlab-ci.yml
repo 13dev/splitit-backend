@@ -2,26 +2,33 @@ before_script:
   - echo "Before script"
   - cd /var/www/html/app
 building:
+  only:
+    - master
   stage: build
   script:
     - git reset --hard
-    - git pull origin dev
+    - git pull origin master
     - composer install
     - cp .env.testing .env
     - php artisan key:generate
     - php artisan db:create -v
-    - php artisan migrate --seed
+    - php artisan migrate:fresh
+    - php artisan db:seed
     - php artisan cache:clear
     - php artisan config:clear
     - php artisan storage:link
-    - sudo chown -R deployer:www-data /var/www/html/app/
+    - chown -R
+    #- chown -R deployer:www-data /var/www/html/app/
     - find /var/www/html/app -type f -exec chmod 664 {} \;
     - find /var/www/html/app -type d -exec chmod 775 {} \;
-    - chgrp -R www-data storage bootstrap/cache
-    - chmod -R ug+rwx storage bootstrap/cache
+    #- #chgrp -R www-data storage bootstrap/cache
+    #- #chmod -R ug+rwx storage bootstrap/cache
 testing:
   stage: test
   script:
+    - composer dump-autoload
+    - php artisan cache:clear
+    - php artisan config:clear
     - php ./vendor/bin/phpunit
 deploying:
   stage: deploy
