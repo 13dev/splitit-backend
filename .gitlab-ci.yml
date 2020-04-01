@@ -17,12 +17,12 @@ building:
     - php artisan cache:clear
     - php artisan config:clear
     - php artisan storage:link
-    - chown -R
     #- chown -R deployer:www-data /var/www/html/app/
     - find /var/www/html/app -type f -exec chmod 664 {} \;
     - find /var/www/html/app -type d -exec chmod 775 {} \;
     #- #chgrp -R www-data storage bootstrap/cache
     #- #chmod -R ug+rwx storage bootstrap/cache
+  when: manual
 testing:
   stage: test
   script:
