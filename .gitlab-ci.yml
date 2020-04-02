@@ -1,6 +1,8 @@
 before_script:
   - echo "Before script"
   - cd /var/www/html/
+  - echo "Removing older releases"
+  - find . -type d -mtime +3 -exec rm -rf {} +;
 building:
   stage: build
   script:
