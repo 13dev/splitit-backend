@@ -4,7 +4,7 @@ before_script:
 building:
   stage: build
   script:
-    - git clone 13dev@gitlab.com:splitapp/Splitit-backend.git $CI_COMMIT_SHA
+    - git clone git@gitlab.com:splitapp/Splitit-backend.git $CI_COMMIT_SHA
     - cd $CI_COMMIT_SHA/
     - git checkout dev
     - composer install
