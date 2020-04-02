@@ -1,10 +1,10 @@
 before_script:
   - echo "Before script"
   - cd /var/www/html/
-  - git clone git@gitlab.com:splitapp/Splitit-backend.git $CI_COMMIT_SHA
 building:
   stage: build
   script:
+    - git clone git@gitlab.com:splitapp/Splitit-backend.git $CI_COMMIT_SHA
     - cd $CI_COMMIT_SHA/
     - git checkout dev
     - composer install
