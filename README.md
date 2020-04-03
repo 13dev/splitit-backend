@@ -51,3 +51,7 @@ $ php artisan migrate:fresh --seed
 | PUT      | `http://localhost:8000/api/profile`           |  ProfileController        | to update current user data
 | PUT      | `http://localhost:8000/api/profile/password`  |  ProfileController        | to update current user password
 
+### POST PARAMS:
+`api/login` params: `email`, `password`
+
+`api/register` params: `email`, `password`, `photo`, `firstname`, `lastname`
