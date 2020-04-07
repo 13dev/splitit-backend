@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\Profile\UpdateProfileRequest;
-use App\Http\Resources\User as UserResource;
+use App\Http\Resources\UserResource as UserResource;
 
 class ProfileController extends Controller
 {

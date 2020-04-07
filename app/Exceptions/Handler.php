@@ -3,8 +3,12 @@
 namespace App\Exceptions;
 
 use Exception;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Validation\ValidationException;
 use MarcinOrlowski\ResponseBuilder\ExceptionHandlerHelper;
+use MarcinOrlowski\ResponseBuilder\ResponseBuilder;
+use Modules\Core\Support\ApiCodes;
 
 class Handler extends ExceptionHandler
 {

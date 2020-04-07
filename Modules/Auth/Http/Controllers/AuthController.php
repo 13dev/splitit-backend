@@ -3,17 +3,27 @@
 namespace Modules\Auth\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\User as UserResource;
-use App\User;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use JWTAuth;
 use Modules\Auth\Http\Requests\LoginRequest;
+use Modules\User\Http\Resources\UserResource;
+use Modules\User\Models\User;
+use Modules\User\Repositories\UserRepositoryInterface;
 use Tymon\JWTAuth\Exceptions\JWTException;
 
 class AuthController extends Controller
 {
+    /**
+     * @var UserRepositoryInterface
+     */
+    private UserRepositoryInterface $repository;
+
+    public function __construct(UserRepositoryInterface $repository)
+    {
+        $this->repository = $repository;
+    }
+
     /**
      * Login
      *
@@ -23,7 +33,7 @@ class AuthController extends Controller
      */
     public function login(LoginRequest $request)
     {
-        $user = User::where(User::EMAIL, $request->email)->first();
+        $user = $this->repository->byEmail($request->email);
 
         if (!$user) {
             return response()->json(['error' => 'User not found.'], 404);

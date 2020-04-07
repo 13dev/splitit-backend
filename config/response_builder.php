@@ -19,6 +19,7 @@ use MarcinOrlowski\ResponseBuilder\Converters\JsonSerializableConverter;
 use MarcinOrlowski\ResponseBuilder\Converters\ToArrayConverter;
 use Modules\Core\Support\ApiCodes;
 use Symfony\Component\HttpFoundation\Response as ResponseCode;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 return [
     /*
@@ -37,8 +38,9 @@ return [
     */
     'map'               => [
         ApiCodes::USER_NOT_FOUND => 'user::api.not_found',
-        ApiCodes::CORE_AUTH_ERROR => 'core::auth_error',
-        ApiCodes::CORE_GENERIC_ERROR => 'core::generic_error',
+        ApiCodes::CORE_AUTH_ERROR => 'core::api.auth_error',
+        ApiCodes::CORE_GENERIC_ERROR => 'core::api.generic_error',
+        ApiCodes::CORE_VALIDATION_ERROR => 'auth.throttle',
     ],
 
     /*
@@ -138,7 +140,9 @@ return [
             'default'            => [
                 'api_code'  => ApiCodes::CORE_GENERIC_ERROR,
                 'http_code' => ResponseCode::HTTP_INTERNAL_SERVER_ERROR,
+                //'msg_enforce' => !env('APP_DEBUG'),
             ],
+
         ],
     ],
 

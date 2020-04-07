@@ -2,8 +2,8 @@
 
 namespace Modules\Auth\Http\Requests;
 
-use App\User;
 use Illuminate\Foundation\Http\FormRequest;
+use Modules\User\Models\User;
 
 class LoginRequest extends FormRequest
 {
