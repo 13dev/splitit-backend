@@ -19,6 +19,7 @@ building:
     - php artisan cache:clear
     - php artisan config:clear
     - php artisan storage:link
+    - php artisan apidoc:generate
     #- chown -R deployer:www-data /var/www/html/app/
     - find /var/www/html/$CI_COMMIT_SHA/ -type f -exec chmod 664 {} \;
     - find /var/www/html/$CI_COMMIT_SHA/ -type d -exec chmod 775 {} \;
