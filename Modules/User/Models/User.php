@@ -3,9 +3,11 @@
 namespace Modules\User\Models;
 
 use App\Notifications\MailResetPasswordNotification;
+use Carbon\Carbon;
 use Illuminate\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use JWTAuth;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class User extends Authenticatable implements JWTSubject
@@ -57,7 +59,9 @@ class User extends Authenticatable implements JWTSubject
      */
     public function getJWTCustomClaims()
     {
-        return [];
+        return [
+            'exp' => Carbon::now()->addDays(28)->timestamp,
+        ];
     }
 
     /**
@@ -66,5 +70,19 @@ class User extends Authenticatable implements JWTSubject
     public function sendPasswordResetNotification($token)
     {
         $this->notify(new MailResetPasswordNotification($token));
+    }
+
+    /**
+     * Check if user is Auth.
+     * @return bool|false|JWTSubject
+     * @throws \Tymon\JWTAuth\Exceptions\JWTException
+     */
+    public function isAuth()
+    {
+        if (!$user = JWTAuth::parseToken()->authenticate()) {
+            return false;
+        }
+
+        return $user;
     }
 }
