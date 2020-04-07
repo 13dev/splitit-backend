@@ -10,6 +10,7 @@ use Log;
 use Modules\Core\Support\ApiCode;
 use Modules\Core\Support\Response;
 use Modules\User\Exceptions\UserNotFoundException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Tymon\JWTAuth\Exceptions\TokenExpiredException;
 use Tymon\JWTAuth\Exceptions\TokenInvalidException;
 
@@ -21,7 +22,7 @@ class Handler extends ExceptionHandler
      * @var array
      */
     protected $dontReport = [
-        //
+        NotFoundHttpException::class,
     ];
 
     /**

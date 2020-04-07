@@ -2,24 +2,9 @@
 
 namespace Modules\Core\Exceptions;
 
-use Illuminate\Validation\ValidationException as BaseValidationException;
-use Modules\Core\Support\ApiExceptionInterface;
+use Modules\Core\Support\ApiCode;
 
-class ValidationException extends BaseValidationException implements ApiExceptionInterface
+class ValidationException extends CoreException
 {
-    /**
-     * @inheritDoc
-     */
-    public function statusCode(): int
-    {
-        // TODO: Implement statusCode() method.
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function error(): string
-    {
-        // TODO: Implement error() method.
-    }
+    protected $code = ApiCode::CORE_ERROR_VALIDATION;
 }

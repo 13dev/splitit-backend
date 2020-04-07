@@ -20,6 +20,10 @@ Route::get('/', function () {
     ];
 });
 
+Route::get('test', function () {
+    throw new \Modules\User\Exceptions\UserNotFoundException();
+});
+
 //Route::group(['middleware' => ['jwt', 'jwt.auth']], function () {
 //    Route::group(['namespace' => 'Profile'], function () {
 //        Route::get('profile', 'ProfileController@me');
