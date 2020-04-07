@@ -1,11 +1,11 @@
 <?php
 
-namespace App;
+namespace Modules\User\Models;
 
 use App\Notifications\MailResetPasswordNotification;
 use Illuminate\Auth\MustVerifyEmail;
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class User extends Authenticatable implements JWTSubject
@@ -19,7 +19,6 @@ class User extends Authenticatable implements JWTSubject
     const ID = 'id';
     const TABLE = 'users';
 
-
     /**
      * The attributes that are mass assignable.
      *
@@ -28,7 +27,7 @@ class User extends Authenticatable implements JWTSubject
     protected $fillable = [
         self::NAME,
         self::PASSWORD,
-        self::EMAIL
+        self::EMAIL,
     ];
 
     /**
@@ -40,7 +39,6 @@ class User extends Authenticatable implements JWTSubject
         self::PASSWORD,
         self::REMEMBER_TOKEN,
     ];
-
 
     /**
      * Get the identifier that will be stored in the subject claim of the JWT.

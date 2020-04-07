@@ -8,8 +8,11 @@
         "kitetail/zttp": "^0.6.0",
         "laravel/framework": "^6.0",
         "laravel/tinker": "^1.0",
+        "marcin-orlowski/laravel-api-response-builder": "^7.1",
         "nwidart/laravel-modules": "^6.2",
-        "tymon/jwt-auth": "1.0.0-rc.5"
+        "prettus/l5-repository": "^2.6",
+        "tymon/jwt-auth": "1.0.0-rc.5",
+        "ext-http": "*"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.6",

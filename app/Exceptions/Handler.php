@@ -3,11 +3,8 @@
 namespace App\Exceptions;
 
 use Exception;
-use Illuminate\Validation\ValidationException;
-use Illuminate\Auth\Access\AuthorizationException;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Symfony\Component\HttpKernel\Exception\HttpException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use MarcinOrlowski\ResponseBuilder\ExceptionHandlerHelper;
 
 class Handler extends ExceptionHandler
 {
@@ -35,6 +32,7 @@ class Handler extends ExceptionHandler
      *
      * @param  \Exception  $exception
      * @return void
+     * @throws Exception
      */
     public function report(Exception $exception)
     {
@@ -42,39 +40,37 @@ class Handler extends ExceptionHandler
     }
 
     /**
-     * Render an exception into an HTTP response.
-     *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \Exception  $exception
-     * @return \Illuminate\Http\Response
+     * @param  Exception  $exception
+     * @return \Illuminate\Http\JsonResponse|\Symfony\Component\HttpFoundation\Response
+     * @throws Exception
      */
     public function render($request, Exception $exception)
     {
-        // return parent::render($request, $exception);
+        return ExceptionHandlerHelper::render($request, $exception);
 
-        $rendered = parent::render($request, $exception);
-
-        if ($exception instanceof ValidationException) {
-            $json = [
-                'error' => $exception->validator->errors(),
-                'status_code' => $rendered->getStatusCode()
-            ];
-        } elseif ($exception instanceof AuthorizationException) {
-            $json = [
-                'error' => 'You are not allowed to do this action.',
-                'status_code' => 403
-            ];
-        }
-        else {
-            // Default to vague error to avoid revealing sensitive information
-            $json = [
-                'error' => (app()->environment() !== 'production')
-                    ? $exception->getMessage()
-                    : 'An error has occurred.',
-                'status_code' => $exception->getCode()
-            ];
-        }
-
-        return response()->json($json, $rendered->getStatusCode());
+//        switch (get_class($exception)) {
+//
+//            case ValidationException::class:
+//                return ResponseBuilder::error(
+//                    ApiCodes::CORE_VALIDATION_ERROR,
+//                    null,
+//                    $exception->validator->errors(),
+//                    );
+//                break;
+//
+//            case AuthorizationException::class:
+//                return ResponseBuilder::error(ApiCodes::CORE_AUTH_ERROR);
+//                break;
+//
+//            default:
+//                return ResponseBuilder::asError(ApiCodes::CORE_GENERIC_ERROR)
+//                    ->withMessage(
+//                        app()->environment() !== 'production'
+//                            ? $exception->getMessage()
+//                            : null
+//                    )->build();
+//                break;
+//        }
     }
 }
