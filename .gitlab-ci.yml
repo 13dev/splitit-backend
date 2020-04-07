@@ -36,7 +36,6 @@ deploying:
   stage: deploy
   script:
     - rm -rf /var/www/html/app/
-    - mkdir -p /var/www/html/app/
     - mv /var/www/html/$CI_COMMIT_SHA /var/www/html/app
     - echo "Deployed"
   when: manual
