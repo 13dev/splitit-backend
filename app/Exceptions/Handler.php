@@ -6,6 +6,7 @@ use Exception;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Validation\ValidationException;
+use Log;
 use Modules\Core\Support\ApiCode;
 use Modules\Core\Support\Response;
 use Modules\User\Exceptions\UserNotFoundException;
@@ -42,6 +43,12 @@ class Handler extends ExceptionHandler
      */
     public function report(Exception $exception)
     {
+        if ($this->shouldntReport($exception)) {
+            Log::critical($exception->getMessage(), [
+                'exception' => $exception,
+            ]);
+        }
+
         parent::report($exception);
     }
 
