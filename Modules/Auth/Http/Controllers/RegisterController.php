@@ -10,6 +10,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use JWTAuth;
 
+/**
+ * @group Auth
+ * Class RegisterController
+ * @package Modules\Auth\Http\Controllers
+ */
 class RegisterController extends Controller
 {
     /**

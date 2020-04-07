@@ -7,6 +7,11 @@ use Modules\Auth\Http\Controllers\RegisterController;
 use Modules\Auth\Http\Controllers\ResetPasswordController;
 
 Route::post('login', [AuthController::class, 'login']);
+
+Route::middleware('jwt.auth')->group(function () {
+    Route::get('logout', [AuthController::class, 'logout']);
+});
+
 //Register route
 Route::post('register', [RegisterController::class, 'register']);
 
