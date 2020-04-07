@@ -10,7 +10,7 @@ building:
     - cd $CI_COMMIT_SHA/
     - git checkout dev
     - composer install
-    - cp .env.testing .env
+    - cp .env.deploy .env
     - php artisan key:generate
     - php artisan db:create -v
     - php artisan migrate:fresh

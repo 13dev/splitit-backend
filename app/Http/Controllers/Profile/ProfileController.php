@@ -2,46 +2,42 @@
 
 namespace App\Http\Controllers\Profile;
 
-use App\User;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\Profile\UpdateProfileRequest;
 use App\Http\Resources\UserResource as UserResource;
+use App\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
 {
-     /**
-     * Get Login User
-     *
-     *
-     * @param Request $request
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
+    /**
+    * Get Login User
+    *
+    *
+    * @param Request $request
+    *
+    * @return \Illuminate\Http\JsonResponse
+    */
     public function me(Request $request)
     {
-
         $user = Auth::user();
 
         $data = new UserResource($user);
 
         return response()->json(compact('data'));
-
     }
 
-
-     /**
-     * Update Profile
-     *
-     *
-     * @param UpdateProfileRequest $request
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
+    /**
+    * Update Profile
+    *
+    *
+    * @param UpdateProfileRequest $request
+    *
+    * @return \Illuminate\Http\JsonResponse
+    */
     public function update(UpdateProfileRequest $request)
     {
-
         $user = Auth::user();
 
         $user->update($request->only(User::NAME, User::EMAIL));
@@ -49,17 +45,16 @@ class ProfileController extends Controller
         $data = new UserResource($user);
 
         return response()->json(compact('data'));
-
     }
 
-     /**
-     * Update Profile
-     *
-     *
-     * @param Request $request
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
+    /**
+    * Update Profile
+    *
+    *
+    * @param Request $request
+    *
+    * @return \Illuminate\Http\JsonResponse
+    */
     public function updatePassword(Request $request)
     {
         $this->validate($request, [

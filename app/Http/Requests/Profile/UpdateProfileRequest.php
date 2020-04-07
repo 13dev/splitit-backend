@@ -28,7 +28,7 @@ class UpdateProfileRequest extends FormRequest
 
         return [
             User::NAME => 'required',
-            User::EMAIL => 'required|email|unique:users,email,'.$user->id,
+            User::EMAIL => 'required|email|unique:users,email,' . $user->id,
         ];
     }
 }

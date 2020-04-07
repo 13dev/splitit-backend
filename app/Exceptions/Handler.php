@@ -6,10 +6,7 @@ use Exception;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Validation\ValidationException;
-use MarcinOrlowski\ResponseBuilder\ExceptionHandlerHelper;
-use MarcinOrlowski\ResponseBuilder\ResponseBuilder;
 use Modules\Core\Support\ApiCode;
-use Modules\Core\Support\ApiCodes;
 use Modules\Core\Support\Response;
 use Modules\User\Exceptions\UserNotFoundException;
 use Tymon\JWTAuth\Exceptions\TokenExpiredException;
@@ -47,7 +44,6 @@ class Handler extends ExceptionHandler
     {
         parent::report($exception);
     }
-
 
     public function render($request, Exception $exception)
     {
