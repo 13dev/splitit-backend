@@ -10,7 +10,9 @@ use Prettus\Repository\Eloquent\BaseRepository;
 class UserRepository extends BaseRepository implements UserRepositoryInterface
 {
     /**
-     * @inheritDoc
+     * @param  string  $email
+     * @return User
+     * @throws UserNotFoundException
      */
     public function byEmail(string $email): User
     {
@@ -24,7 +26,8 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
     }
 
     /**
-     * @inheritDoc
+     * @param  int  $id
+     * @return User
      * @throws UserNotFoundException
      */
     public function byId(int $id): User
@@ -36,6 +39,9 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
         }
     }
 
+    /**
+     * @return string
+     */
     public function model()
     {
         return User::class;
