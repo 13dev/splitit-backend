@@ -16,13 +16,11 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
      */
     public function byEmail(string $email): User
     {
-        try {
-            return $this
-                ->findWhere([User::EMAIL => $email])
-                ->first();
-        } catch (ModelNotFoundException $e) {
+        if (!$user = $this->findWhere([User::EMAIL => $email])->first()) {
             throw new UserNotFoundException;
         }
+
+        return $user;
     }
 
     /**
@@ -33,7 +31,7 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
     public function byId(int $id): User
     {
         try {
-            return $this->find($id)->first();
+            return $this->find($id);
         } catch (ModelNotFoundException $e) {
             throw new UserNotFoundException;
         }

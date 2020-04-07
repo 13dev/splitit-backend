@@ -32,8 +32,10 @@ class UserService
     public function login(Request $request)
     {
         // Search user by email
-        if (!$user = $this->repository->byEmail($request->email)) {
-            return Response::error(ApiCode::USER_NOT_FOUND);
+        try {
+            $user = $this->repository->byEmail($request->email);
+        } catch (\Exception $exception) {
+            return Response::error(ApiCode::AUTH_ERROR_LOGIN);
         }
 
         // Account Validation

@@ -2,8 +2,8 @@
 
 namespace Modules\User\Exceptions;
 
-use Symfony\Component\HttpKernel\Exception\HttpException;
+use Exception;
 
-class UserNotFoundException extends HttpException
+class UserNotFoundException extends Exception
 {
 }

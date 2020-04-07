@@ -11,6 +11,7 @@ use MarcinOrlowski\ResponseBuilder\ResponseBuilder;
 use Modules\Core\Support\ApiCode;
 use Modules\Core\Support\ApiCodes;
 use Modules\Core\Support\Response;
+use Modules\User\Exceptions\UserNotFoundException;
 use Tymon\JWTAuth\Exceptions\TokenExpiredException;
 use Tymon\JWTAuth\Exceptions\TokenInvalidException;
 
@@ -68,7 +69,9 @@ class Handler extends ExceptionHandler
             case AuthorizationException::class:
                 return Response::error(ApiCode::AUTH_ERROR);
                 break;
-
+            case UserNotFoundException::class:
+                return Response::error(ApiCode::USER_NOT_FOUND);
+                break;
             default:
                 $message = app()->environment() !== 'production'
                     ? $exception->getMessage()
