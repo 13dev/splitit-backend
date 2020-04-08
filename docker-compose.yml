@@ -3,7 +3,7 @@ version: '3.7'
 services:
   db:
     container_name: db
-    image: mariadb
+    image: mariadb:latest
     environment:
       MYSQL_ROOT_PASSWORD: admin
       MYSQL_DATABASE: app
