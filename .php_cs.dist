@@ -20,7 +20,12 @@ return PhpCsFixer\Config::create()
     ->setRules([
         '@PSR2' => true,
         // Concatenation should be used with at least one whitespace around.
+        'binary_operator_spaces' => [
+            'align_double_arrow' => true,
+            'align_equals'       => false
+        ],
         'concat_space' => ['spacing' => 'one'],
+        'array_syntax' => ['syntax' => 'short'],
         // Unused use statements must be removed.
         'ordered_imports' => true,
         // Removes extra empty lines.
