@@ -19,7 +19,6 @@ building:
     - php artisan cache:clear
     - php artisan config:clear
     - php artisan storage:link
-    - php artisan apidoc:generate
     #- chown -R deployer:www-data /var/www/html/app/
     - find /var/www/html/$CI_COMMIT_SHA/ -type f -exec chmod 664 {} \;
     - find /var/www/html/$CI_COMMIT_SHA/ -type d -exec chmod 775 {} \;
@@ -38,5 +37,8 @@ deploying:
   script:
     - rm -rf /var/www/html/app/
     - mv /var/www/html/$CI_COMMIT_SHA /var/www/html/app
+    - php artisan apidoc:generate
+    - php artisan telescope:install
+    - php artisan migrate
     - echo "Deployed"
   when: manual
