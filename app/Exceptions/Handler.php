@@ -6,9 +6,11 @@ use Exception;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Validation\ValidationException;
+use Log;
 use Modules\Core\Support\ApiCode;
 use Modules\Core\Support\Response;
 use Modules\User\Exceptions\UserNotFoundException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Tymon\JWTAuth\Exceptions\TokenExpiredException;
 use Tymon\JWTAuth\Exceptions\TokenInvalidException;
 
@@ -20,7 +22,7 @@ class Handler extends ExceptionHandler
      * @var array
      */
     protected $dontReport = [
-        //
+        NotFoundHttpException::class,
     ];
 
     /**
@@ -42,6 +44,12 @@ class Handler extends ExceptionHandler
      */
     public function report(Exception $exception)
     {
+        if ($this->shouldntReport($exception)) {
+            Log::critical($exception->getMessage(), [
+                'exception' => $exception,
+            ]);
+        }
+
         parent::report($exception);
     }
 

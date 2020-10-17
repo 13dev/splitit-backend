@@ -36,7 +36,10 @@ deploying:
   stage: deploy
   script:
     - rm -rf /var/www/html/app/
-    - mkdir -p /var/www/html/app/
     - mv /var/www/html/$CI_COMMIT_SHA /var/www/html/app
+    - cd /var/www/html/app/
+    - php artisan apidoc:generate
+    - php artisan telescope:install
+    - php artisan migrate
     - echo "Deployed"
   when: manual

@@ -4,13 +4,12 @@ namespace Modules\User\Services;
 
 use Hash;
 use Illuminate\Http\Request;
-use JWTAuth;
+use Modules\Auth\Services\AuthService;
 use Modules\Core\Support\ApiCode;
 use Modules\Core\Support\Response;
 use Modules\User\Http\Resources\UserResource;
 use Modules\User\Models\User;
 use Modules\User\Repositories\UserRepositoryInterface;
-use Tymon\JWTAuth\Exceptions\JWTException;
 
 class UserService
 {
@@ -19,9 +18,26 @@ class UserService
      */
     private UserRepositoryInterface $repository;
 
-    public function __construct(UserRepositoryInterface $repository)
+    /**
+     * @var AuthService
+     */
+    private AuthService $authService;
+
+    public function __construct(UserRepositoryInterface $repository, AuthService $authService)
     {
         $this->repository = $repository;
+        $this->authService = $authService;
+    }
+
+    /**
+     * Logout user.
+     * @return Response
+     */
+    public function logout()
+    {
+        $this->authService->invalidateToken();
+
+        return Response::success(null, ApiCode::CORE_SUCCESS_OK, 'Successfully logged out');
     }
 
     /**
@@ -46,20 +62,9 @@ class UserService
         }
 
         // Login Attempt
-        $credentials = $request->only(User::EMAIL, User::PASSWORD);
-
-        try {
-
-            // Expired Time 28days
-            //JWTAuth::factory()->setTTL(40320);
-            //$customClaims = ;
-
-            if (!$token = JWTAuth::attempt($credentials)) {
-                return Response::error(ApiCode::AUTH_ERROR_LOGIN);
-            }
-        } catch (JWTException $e) {
-            return Response::error(ApiCode::AUTH_ERROR_TOKEN);
-        }
+        $token = $this->authService->attemptLogin(
+            $request->only(User::EMAIL, User::PASSWORD)
+        );
 
         return Response::success(new UserResource($user, $token));
     }

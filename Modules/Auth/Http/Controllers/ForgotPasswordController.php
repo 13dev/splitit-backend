@@ -8,6 +8,11 @@ use Illuminate\Foundation\Auth\ResetsPasswords;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 use  Illuminate\Http\Request;
 
+/**
+ * @group Auth
+ * Class ForgotPasswordController
+ * @package Modules\Auth\Http\Controllers
+ */
 class ForgotPasswordController extends Controller
 {
     use SendsPasswordResetEmails, ResetsPasswords {
